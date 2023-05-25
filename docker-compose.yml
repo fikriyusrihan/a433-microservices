@@ -1,19 +1,40 @@
 version: "3.7"
 
 services:
+  # The application service
   item-app:
+
+    # Using image from remote repository
     image: artworkspace/item-app:v1
+
+    # Port mapping from host to container
     ports:
       - "80:8080"
+
+    # Make sure the application is up after item-db is up
+    # and down before item-db is down
     depends_on:
       - item-db
+
+    # Always restart the application is stopped/crashed
     restart: always
 
+
+  # The database service
   item-db:
+
+    # Using mongo image with tag 3
     image: mongo:3
+
+    # Mount a volume to persist data in the database
     volumes:
       - app-db:/data/db
+
+    # Always restart the database is stopped/crashed
     restart: always
 
+# Volumes declaration to persist data
 volumes:
+
+  # A volume named app-db for item-db service
   app-db:
