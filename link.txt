@@ -1,0 +1,3 @@
+ghcr.io/fikriyusrihan/item-app:v1
+
+https://github.com/users/fikriyusrihan/packages/container/package/item-app
