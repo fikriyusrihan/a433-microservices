@@ -5,7 +5,7 @@ services:
   item-app:
 
     # Using image from remote repository
-    image: artworkspace/item-app:v1
+    image: ghcr.io/fikriyusrihan/item-app:v1
 
     # Port mapping from host to container
     ports:

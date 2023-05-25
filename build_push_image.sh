@@ -10,11 +10,11 @@ docker images
 # Before pushing the image to remote repository,
 # we need to tag it with the remote repository namespace.
 # Tag the local image with the remote repository namespace
-docker tag item-app:v1 artworkspace/item-app:v1
+docker tag item-app:v1 ghcr.io/fikriyusrihan/item-app:v1
 
 # Setting up credentials for Docker Hub
-# Put your access token in the environment variable PASSWORD_DOCKER_HUB
-echo "$PASSWORD_DOCKER_HUB" | docker login -u artworkspace --password-stdin
+# Put your access token in the environment variable CR_PAT
+echo "$CR_PAT" | docker login ghcr.io -u fikriyusrihan --password-stdin
 
 # Push the image to Docker Hub
-docker push artworkspace/item-app:v1
+docker push ghcr.io/fikriyusrihan/item-app:v1
