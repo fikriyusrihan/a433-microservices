@@ -22,13 +22,13 @@ jobs:
       - run: docker login ghcr.io -u $DOCKER_USER -p $DOCKER_PASS
       - run: push ghcr.io/fikriyusrihan/karsajobs:latest
 workflows:
-    version: 2
-    build-and-test:
-        jobs:
-        - lint-dockerfile
-        - test-app:
-            requires:
-                - lint-dockerfile
-        - build-app-karsajobs:
-            requires:
-                - test-app
+  version: 2
+  build-and-test:
+    jobs:
+      - lint-dockerfile
+      - test-app:
+          requires:
+            - lint-dockerfile
+      - build-app-karsajobs:
+          requires:
+            - test-app
