@@ -1,0 +1,2 @@
+https://github.com/users/fikriyusrihan/packages/container/package/karsajobs
+ghcr.io/fikriyusrihan/karsajobs:latest
