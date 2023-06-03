@@ -1,51 +1,94 @@
 apiVersion: apps/v1
+
+# Membuat sebuah object statefulset
+# Statefulset ini akan digunakan sebagai database dari karsajobs
+# Database yang digunakan adalah mongodb
 kind: StatefulSet
 metadata:
+
+  # Nama dari statefulset ini adalah mongo
   name: mongo
   labels:
     app: karsajobs
     tier: data
+
+# Definisi spesifikasi dari statefulset yang akan dibuat
 spec:
+
+  # Merupakan jumlah pods yang ingin dibuat
   replicas: 1
+
+  # Selector untuk menargetkan pods yang ingin diatur
+  #  Statefulset ini akan digunakan untuk mengakses pods yang memiliki label tier: data
   selector:
     matchLabels:
       app: karsajobs
       tier: data
-  serviceName: mongo
+
+  # Nama dari service yang akan digunakan oleh statefulset ini
+  serviceName: data-tier
+
+  # Definisi dari kontainer yang ingin dibuat
   template:
     metadata:
+
+      # Label yang akan digunakan oleh pods yang dibuat
       labels:
         app: karsajobs
         tier: data
     spec:
       containers:
+          # Definisi dari kontainer yang ingin dibuat
+          # Nama kontainer adalah mongo
         - name: mongo
+
+          # Menggunakan image mongo
           image: mongo
+
+          # Konfigurasi env dari kontainer
+          # Nilainya diambil dari mongo-secret yang telah di-mount
           env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+
+          # Port yang akan digunakan oleh kontainer
           ports:
             - containerPort: 27017
               name: mongo
+
+          # Melakukan mounting terhadap volume yang telah dibuat
           volumeMounts:
+
+              # Mounting terhadap volume mongo-persistent-storage
+              # mongo-persistent-storage merupakan persistent volume yang telah dibuat
             - name: mongo-persistent-storage
               mountPath: /data/db
 
+              # Mounting terhadap volume mongo-config-map
+              # mongo-config-map merupakan config map yang telah dibuat
             - name: mongo-config-map
               mountPath: /config
               readOnly: true
 
+              # Mounting terhadap volume mongo-secret-credential
+              # mongo-secret-credential merupakan secret yang telah dibuat
             - name: mongo-secret-credential
               mountPath: /etc/mongo-credentials
               readOnly: true
 
+      # Definisi dari volume yang akan digunakan
       volumes:
+
+          # Definisi dari volume mongo-persistent-storage
+          # Menggunakan claim untuk mendapatkan persistent volume
         - name: mongo-persistent-storage
           persistentVolumeClaim:
             claimName: mongo-pv-claim
 
+          # Definisi dari volume mongo-config-map
+          # Merupakan config map yang telah dibuat
         - name: mongo-config-map
           configMap:
             name: mongo-config
@@ -53,6 +96,8 @@ spec:
               - key: mongo.conf
                 path: mongo.conf
 
+          # Definisi dari volume mongo-secret-credential
+          # Merupakan secret yang telah dibuat
         - name: mongo-secret-credential
           secret:
             secretName: mongo-secret

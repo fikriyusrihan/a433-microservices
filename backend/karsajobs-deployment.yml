@@ -1,27 +1,54 @@
 apiVersion: apps/v1
+
+# Membuat sebuah object deployment
+# Deployment ini berkaitan dengan layanan backend dari karsajobs
 kind: Deployment
 metadata:
+
+  # Nama dari deployment ini adalah service-tier
   name: service-tier
+
+  # Penggunaan label untuk menandai deployment
   labels:
     app: karsajobs
     tier: service
+
+# Definisi spesifikasi dari deployment yang akan dibuat
 spec:
+  # Merupakan jumlah pods yang ingin dibuat
   replicas: 1
+
+  # Selector untuk menargetkan pods yang ingin diatur
   selector:
     matchLabels:
       tier: service
+
+  # Merupakan template dari konfigurasi pods yang ingin dibuat
   template:
     metadata:
       labels:
         app: karsajobs
         tier: service
     spec:
+
+      # Definisi dari kontainer yang ingin dibuat
       containers:
+
+        # Nama dari kontainer
         - name: karsajobs
+
+          # Image yang akan digunakan untuk kontainer
+          # Image diambil dari GitHub Packages (Container Registry)
           image: ghcr.io/fikriyusrihan/karsajobs:latest
+
+          # Image hanya akan diunduh jika belum ada
           imagePullPolicy: IfNotPresent
+
+          # Port yang akan digunakan oleh kontainer
           ports:
             - containerPort: 8080
+
+          # Environment variable yang akan digunakan oleh kontainer
           env:
             - name: APP_PORT
               value: "8080"

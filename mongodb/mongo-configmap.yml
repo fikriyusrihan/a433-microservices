@@ -1,7 +1,14 @@
 apiVersion: v1
+
+# Membuat sebuah object configmap
+# Configmap ini berkaitan dengan konfigurasi dari mongodb
 kind: ConfigMap
 metadata:
+
+    # Nama dari configmap ini adalah mongo-config
   name: mongo-config
+
+# Data yang disimpan pada configmap
 data:
   mongo.conf: |
     storage:

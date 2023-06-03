@@ -1,13 +1,30 @@
 apiVersion: v1
+
+# Membuat sebuah object service
+# Service ini akan digunakan untuk mengakses pods yang ada di dalam deployment
 kind: Service
 metadata:
+
+  # Nama dari service ini adalah app-tier
+  # Service ini akan digunakan oleh layanan frontend dari karsajobs
   name: app-tier
   labels:
     app: karsajobs
+
+# Definisi spesifikasi dari service yang akan dibuat
 spec:
+
+  # Definisi port yang dimiliki oleh service
+  # Bernilai 8000 dengan nama karsajobs-ui
   ports:
     - port: 8000
       name: karsajobs-ui
+
+  # Selector untuk menargetkan pods yang ingin diatur
+  # Service ini akan digunakan untuk mengakses pods yang memiliki label tier: app
   selector:
     tier: app
+
+  # Tipe dari service yang akan dibuat
+  # Tipe NodePort digunakan untuk mengakses service dari luar cluster
   type: NodePort

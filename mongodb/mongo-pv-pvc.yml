@@ -1,26 +1,50 @@
 apiVersion: v1
+
+# Membuat sebuah object persistent volume
 kind: PersistentVolume
 metadata:
+
+  # Nama dari persistent volume ini adalah mongo-pv-volume
   name: mongo-pv-volume
   labels:
     type: local
 spec:
+
+  # Storage class yang digunakan adalah mongo-storage-class
   storageClassName: mongo-storage-class
+
+  # Kapasitas yang disediakan adalah 1Gi atau 1 Gigabyte
   capacity:
     storage: 1Gi
+
+  # Akses mode yang digunakan adalah ReadWriteOnce
+  # Artinya persistent volume ini hanya dapat diakses oleh satu pod
   accessModes:
     - ReadWriteOnce
+
+  # Host path yang digunakan adalah /mnt/data/mongo
+    # Artinya persistent volume ini akan menyimpan data pada /mnt/data/mongo pada host
   hostPath:
     path: "/mnt/data/mongo"
 ---
 apiVersion: v1
+
+# Membuat sebuah object persistent volume claim
 kind: PersistentVolumeClaim
 metadata:
+
+  # Nama dari persistent volume claim ini adalah mongo-pv-claim
   name: mongo-pv-claim
 spec:
+
+  # Storage class yang digunakan adalah mongo-storage-class
   storageClassName: mongo-storage-class
+
+  # AccessMode yang diminta oleh claim ini adalah ReadWriteOnce
   accessModes:
     - ReadWriteOnce
+
+  # Kapasitas yang diminta oleh claim ini adalah 1Gi atau 1 Gigabyte
   resources:
     requests:
       storage: 1Gi

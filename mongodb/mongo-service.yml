@@ -1,13 +1,30 @@
 apiVersion: v1
+
+# Membuat sebuah object service
 kind: Service
 metadata:
+
+  # Nama dari service ini adalah data-tier
+  # Service ini akan digunakan oleh layanan database dari karsajobs
   name: data-tier
   labels:
     app: karsajobs
+
+# Definisi spesifikasi dari service yang akan dibuat
 spec:
+
+  # Definisi port yang dimiliki oleh service
+  # Bernilai 27017 dengan nama mongo
   ports:
     - port: 27017
       name: mongo
+
+  # Selector untuk menargetkan pods yang ingin diatur
+  # Service ini akan digunakan untuk mengakses pods yang memiliki label tier: data
   selector:
     tier: data
+
+  # Tipe dari service yang akan dibuat
+  # Tipe ClusterIP digunakan untuk mengakses service dari dalam cluster
+  # Biasanya digunakan oleh stateful application seperti mongodb
   clusterIP: None
