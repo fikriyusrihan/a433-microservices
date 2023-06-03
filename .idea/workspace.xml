@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0431c66f-91ad-4e26-a535-efcb84cfd99b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/grafana-dashboard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/monitoring.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/karsajobs-deployment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/karsajobs-deployment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/karsajobs-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/karsajobs-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/karsajobs-ui-deployment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/karsajobs-ui-deployment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/karsajobs-ui-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/karsajobs-ui-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/mongo-configmap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/mongo-configmap.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/mongo-pv-pvc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/mongo-pv-pvc.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mongodb/mongo-secret.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mongodb/mongo-secret.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,18 +44,22 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "kubernetes",
-    "last_opened_file_path": "E:/Code/Docker/dicoding-microservices/a433-microservices",
+    "last_opened_file_path": "E:/Code/Docker/dicoding-microservices/a433-microservices/monitoring",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Code\Docker\dicoding-microservices\a433-microservices\monitoring" />
+      <recent name="E:\Code\Docker\dicoding-microservices\a433-microservices" />
+      <recent name="E:\Code\Docker\dicoding-microservices\a433-microservices\.circleci" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Code\Docker\dicoding-microservices\a433-microservices" />
     </key>
   </component>
@@ -74,8 +74,7 @@
       <workItem from="1685013976391" duration="5914000" />
       <workItem from="1685065985143" duration="66000" />
       <workItem from="1685774877665" duration="1831000" />
-      <workItem from="1685776734273" duration="3355000" />
-      <workItem from="1685792878855" duration="3406000" />
+      <workItem from="1685776821909" duration="14000" />
     </task>
     <servers />
   </component>
