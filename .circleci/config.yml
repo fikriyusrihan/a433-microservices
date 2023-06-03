@@ -2,25 +2,29 @@ version: 2.1
 jobs:
   lint-dockerfile:
     docker:
-      - image: hadolint/hadolint
+      - image: docker:stable
     steps:
       - checkout
-      - run: hadolint Dockerfile
+      - setup_remote_docker
+      - run:
+          name: run hadolint
+          command: docker run --rm --interactive hadolint/hadolint < Dockerfile
   test-app:
     docker:
-      - image: circleci/golang:1.11
+      - image: circleci/golang:latest
     steps:
       - checkout
       - run: go test -v -short --count=1 $(go list ./...)
   build-app-karsajobs:
     docker:
-      - image: docker:18.09.1-git
+      - image: docker:stable
     steps:
       - checkout
       - setup_remote_docker
-      - run: build -t fikriyusrihan/karsajobs:latest .
+      - run: docker build -t fikriyusrihan/karsajobs:latest .
+      - run: docker tag fikriyusrihan/karsajobs:latest ghcr.io/fikriyusrihan/karsajobs:latest
       - run: docker login ghcr.io -u $DOCKER_USER -p $DOCKER_PASS
-      - run: push ghcr.io/fikriyusrihan/karsajobs:latest
+      - run: docker push ghcr.io/fikriyusrihan/karsajobs:latest
 workflows:
   version: 2
   build-and-test:
