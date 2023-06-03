@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-tier
+  labels:
+    app: karsajobs
+    tier: service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: service
+  template:
+    metadata:
+      labels:
+        app: karsajobs
+        tier: service
+    spec:
+      containers:
+        - name: karsajobs
+          image: ghcr.io/fikriyusrihan/karsajobs:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_PORT
+              value: "8080"
+            - name: MONGO_HOST
+              value: "data-tier"
+            - name: MONGO_USER
+              valueFrom:
+                  secretKeyRef:
+                    name: mongo-secret
+                    key: MONGO_ROOT_USERNAME
+            - name: MONGO_PASS
+              valueFrom:
+                  secretKeyRef:
+                    name: mongo-secret
+                    key: MONGO_ROOT_PASSWORD
