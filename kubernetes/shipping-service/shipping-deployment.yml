@@ -25,7 +25,17 @@ spec:
           env:
             - name: PORT
               value: "3001"
-
-            # TODO: Revisit this after configuring RabbitMQ on Kubernetes
-            - name: AMQP_URL
-              value: "amqp://default_user_ZEHFr3NHCZ7QsKZORT_:QI4KZHcEkZEawQq-e8NZKyYP4Pnfdix9@rabbitmq-cluster.ecommerce:5672"
+            - name: AMQP_HOST
+              value: "rabbitmq-cluster.ecommerce"
+            - name: AMQP_PORT
+              value: "5672"
+            - name: AMQP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: username
+            - name: AMQP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: password
