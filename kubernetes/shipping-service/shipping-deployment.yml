@@ -1,27 +1,55 @@
 apiVersion: apps/v1
+
+# Membuat sebuah deployment dengan nama shipping-deployment
 kind: Deployment
+
+# Metadata dari deployment
 metadata:
+  # Nama deployment
   name: shipping-deployment
+
+  # Label dari deployment
   labels:
     app: ecommerce
     service: shipping
+
+# Spesifikasi object deployment
 spec:
+  # Akan membuat 1 replika pod
   replicas: 1
+
+  # Selector digunakan untuk menentukan pod yang akan diakses oleh deployment
   selector:
     matchLabels:
       service: shipping
+
+  # Template pod yang akan dibuat oleh deployment
   template:
+    # Metadata dari pod
     metadata:
+      # Label dari pod
       labels:
         app: ecommerce
         service: shipping
+
+    # Spesifikasi container yang akan dibuat oleh pod
     spec:
       containers:
+        # Nama container
         - name: shipping-service-container
+
+          # Image yang digunakan untuk membuat container
+          # mengambil image dari ghcr (Github Container Registry)
           image: ghcr.io/fikriyusrihan/shipping-service:latest
+
+          # Image pull policy, Always akan selalu mengambil image ketika membuat pod
           imagePullPolicy: Always
+
+          # Port yang akan digunakan oleh container
           ports:
             - containerPort: 3001
+
+          # Environment variable yang akan digunakan oleh container
           env:
             - name: PORT
               value: "3001"

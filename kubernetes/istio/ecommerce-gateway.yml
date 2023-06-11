@@ -1,10 +1,21 @@
 apiVersion: networking.istio.io/v1alpha3
+
+# Membuat sebuah gateway dengan nama ecommerce-gateway
 kind: Gateway
+
+# Metadata dari gateway
 metadata:
+  # Nama gateway
   name: ecommerce-gateway
+
+# Spesifikasi object gateway
 spec:
+
+  # Menggunakan default controller istio
   selector:
     istio: ingressgateway
+
+  # Menggunakan port 80 untuk mengakses gateway
   servers:
     - port:
         number: 80
@@ -14,20 +25,37 @@ spec:
         - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
+
+# Membuat sebuah virtual service dengan nama ecommerce
 kind: VirtualService
+
+# Metadata dari virtual service
 metadata:
+  # Nama virtual service
   name: ecommerce
+
+# Spesifikasi object virtual service
 spec:
+  # Menggunakan host *
   hosts:
   - "*"
+
+  # Menggunakan gateway ecommerce-gateway
   gateways:
   - ecommerce-gateway
+
+  # Menentukan route untuk mengakses service
   http:
+  # Ketika URL yang diakses adalah /order
   - match:
     - uri:
         exact: /order
+
+    # Akan mengakses service order-service
     route:
     - destination:
         host: order-service
+
+        # dengan port 3000
         port:
           number: 3000

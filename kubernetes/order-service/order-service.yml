@@ -1,13 +1,29 @@
 apiVersion: v1
+
+# Membuat sebuah service dengan nama order-service
+# Service ini akan digunakan untuk mengakses aplikasi order-service
 kind: Service
+
+# Metadata dari service
 metadata:
+  # Nama service
   name: order-service
+
+  # Label dari service
   labels:
     app: ecommerce
+
+# Spesifikasi object service
 spec:
+  # Port yang akan digunakan untuk mengakses service
   ports:
     - port: 3000
       name: http
+
+  # Selector digunakan untuk menentukan pod yang akan diakses oleh service
+  # Service ini akan digunakan untuk mengakses pod dengan label service: order
   selector:
     service: order
+
+  # Tipe service
   type: NodePort

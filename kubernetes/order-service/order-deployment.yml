@@ -1,27 +1,56 @@
 apiVersion: apps/v1
+
+# Membuat sebuah deployment dengan nama order-deployment
+# Deployment ini akan digunakan untuk membuat pod yang menjalankan aplikasi order-service
 kind: Deployment
+
+# Metadata dari deployment
 metadata:
+  # Nama deployment
   name: order-deployment
+
+  # Label dari deployment
   labels:
     app: ecommerce
     service: order
+
+# Spesifikasi object deployment
 spec:
+  # Akan membuat 1 replika pod
   replicas: 1
+
+  # Selector digunakan untuk menentukan pod yang akan diakses oleh deployment
   selector:
     matchLabels:
       service: order
+
+  # Template pod yang akan dibuat oleh deployment
   template:
+    # Metadata dari pod
     metadata:
+      # Label dari pod
       labels:
         app: ecommerce
         service: order
+
+    # Spesifikasi container yang akan dibuat oleh pod
     spec:
       containers:
+        # Nama container
         - name: order-service-container
+
+          # Image yang digunakan untuk membuat container
+          # mengambil image dari ghcr (Github Container Registry)
           image: ghcr.io/fikriyusrihan/order-service:latest
+
+          # Image pull policy, Always akan selalu mengambil image ketika membuat pod
           imagePullPolicy: Always
+
+          # Port yang akan digunakan oleh container
           ports:
             - containerPort: 3000
+
+          # Environment variable yang akan digunakan oleh container
           env:
             - name: PORT
               value: "3000"

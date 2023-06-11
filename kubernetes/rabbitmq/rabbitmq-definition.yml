@@ -1,8 +1,19 @@
 apiVersion: rabbitmq.com/v1beta1
+
+# Membuat sebuah object RabbitmqCluster dengan nama rabbitmq-cluster
 kind: RabbitmqCluster
+
+# Metadata dari object RabbitmqCluster
 metadata:
+  # Nama object RabbitmqCluster
   name: rabbitmq-cluster
+
+# Spesifikasi dari RabbitmqCluster
 spec:
+
+  # Menentukan jumlah replica dari RabbitmqCluster
   replicas: 1
+
+  # Menggunakan service dengan tipe NodePort
   service:
     type: NodePort
