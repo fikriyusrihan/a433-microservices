@@ -17,11 +17,15 @@ var channel, connection;
 
 connectToQueue();
 
+// Fungsi delay digunakan untuk menunda eksekusi kode selama beberapa detik
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
 async function connectToQueue() {
+    // Menunggu 5 detik agar sidecar proxy selesai di-deploy.
+    // Ketika menggunakan istio, container tidak langsung dapat memanggil rabbitmq
+    // sehingga perlu menunggu beberapa saat sampai sidecar selesai di-deploy.
     await delay(5000);
     try {
         // Membuat koneksi dengan AMQP server yaitu RabbitMQ
