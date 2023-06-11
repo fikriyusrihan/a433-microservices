@@ -1,0 +1,48 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: 'rabbitmq_container'
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - ecommerce_network
+
+  order:
+    image: ghcr.io/fikriyusrihan/order-service:latest
+    container_name: 'order_container'
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+    depends_on:
+      - rabbitmq
+    environment:
+      PORT: 3000
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+    networks:
+      - ecommerce_network
+
+  shipping:
+    image: ghcr.io/fikriyusrihan/shipping-service:latest
+    container_name: 'shipping_container'
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/src
+    depends_on:
+      - rabbitmq
+    environment:
+      PORT: 3001
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+    networks: 
+      - ecommerce_network
+
+networks:
+  ecommerce_network:
+    driver: bridge
+
