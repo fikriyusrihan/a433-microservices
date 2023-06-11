@@ -5,9 +5,14 @@ const app = express();
 
 const bp = require("body-parser");
 
-// Import amqplib untuk berinteraksi dengan protokol AMQP
+// Modifikasi kode agar dapat menggunakan kredensial dari kubernetes secret
 const amqp = require("amqplib");
-const amqpServer = process.env.AMQP_URL;
+const host = process.env.AMQP_HOST;
+const port = process.env.AMQP_PORT;
+const user = process.env.AMQP_USER;
+const pass = process.env.AMQP_PASS;
+const amqpServer = `amqp://${user}:${pass}@${host}:${port}`;
+
 var channel, connection;
 
 connectToQueue();
