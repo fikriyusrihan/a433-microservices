@@ -1,0 +1,13 @@
+Index: .env
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>VUE_APP_BACKEND=http://127.0.0.1:59618\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.env b/.env
+--- a/.env	(revision 15f144d64eb73feca4eb4c8c2661cb832eb37cb9)
++++ b/.env	(date 1685809243639)
+@@ -1,1 +1,1 @@
+-VUE_APP_BACKEND=http://127.0.0.1:59618
++VUE_APP_BACKEND=http://127.0.0.1:64031
