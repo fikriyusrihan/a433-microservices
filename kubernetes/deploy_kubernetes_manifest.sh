@@ -1,5 +1,7 @@
 #! /bin/bash
 
+kubectl create namespace ecommerce
+
 kubectl apply -f istio/ecommerce-gateway.yml -n ecommerce
 
 kubectl apply -f rabbitmq/rabbitmq-definition.yml -n ecommerce

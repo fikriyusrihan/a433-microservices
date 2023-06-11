@@ -6,11 +6,3 @@ spec:
   replicas: 1
   service:
     type: NodePort
-  override:
-    statefulSet:
-      spec:
-        template:
-          metadata:
-            annotations:
-              traffic.sidecar.istio.io/includeInboundPorts: "5672,15672"
-              traffic.sidecar.istio.io/includeOutboundPorts: "5672,15672"

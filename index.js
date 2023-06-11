@@ -34,7 +34,7 @@ async function connectToQueue() {
     }
 }
 
-// Membuat endpoint untuk membuat order
+// Membuat endpoint untuk menerima order
 app.post("/order", (req, res) => {
     // Mengambil data order dari request body
     const { order } = req.body;
