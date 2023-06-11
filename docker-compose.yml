@@ -4,13 +4,14 @@ services:
     image: rabbitmq:3.11-management
     container_name: 'rabbitmq_container'
     ports:
-      - "5673:5672"
-      - "15673:15672"
+      - "5672:5672"
+      - "15672:15672"
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - ecommerce_network
+    restart: always
 
   order:
     image: ghcr.io/fikriyusrihan/order-service:latest
@@ -26,6 +27,7 @@ services:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - ecommerce_network
+    restart: always
 
   shipping:
     image: ghcr.io/fikriyusrihan/shipping-service:latest
@@ -41,6 +43,7 @@ services:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks: 
       - ecommerce_network
+    restart: always
 
 networks:
   ecommerce_network:
