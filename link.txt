@@ -1,1 +1,2 @@
+https://github.com/users/fikriyusrihan/packages/container/package/shipping-service
 ghcr.io/fikriyusrihan/shipping-service:latest
