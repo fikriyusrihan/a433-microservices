@@ -3,5 +3,20 @@ kind: RabbitmqCluster
 metadata:
   name: rabbitmq-cluster
 spec:
-  service:
-    type: NodePort
+  replicas: 1
+  override:
+    service:
+      spec:
+        ports:
+          - name: epmd
+            port: 4369
+            targetPort: 4369
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: rabbitmq
+                ports:
+                  - containerPort: 4369
+                    name: epmd
