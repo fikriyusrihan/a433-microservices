@@ -17,7 +17,12 @@ var channel, connection;
 
 connectToQueue();
 
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 async function connectToQueue() {
+    await delay(5000);
     try {
         // Membuat koneksi dengan AMQP server yaitu RabbitMQ
         connection = await amqp.connect(amqpServer);
