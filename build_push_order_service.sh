@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Build order service image using Dockerfile in current directory
-docker build -t fikriyusrihan/order-service:latest .
+docker build -t fikriyusrihan/order-service:latest . --no-cache
 
 # Tag order service image to be pushed to GitHub Container Registry
 docker tag fikriyusrihan/order-service:latest ghcr.io/fikriyusrihan/order-service:latest

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deployment
+  labels:
+    app: ecommerce
+    service: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: order
+  template:
+    metadata:
+      labels:
+        app: ecommerce
+        service: order
+    spec:
+      containers:
+        - name: order-service-container
+          image: ghcr.io/fikriyusrihan/order-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: AMQP_HOST
+              value: "rabbitmq-cluster.ecommerce"
+            - name: AMQP_PORT
+              value: "5672"
+            - name: AMQP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: username
+            - name: AMQP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: password
