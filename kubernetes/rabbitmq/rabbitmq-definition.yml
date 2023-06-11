@@ -4,19 +4,13 @@ metadata:
   name: rabbitmq-cluster
 spec:
   replicas: 1
+  service:
+    type: NodePort
   override:
-    service:
-      spec:
-        ports:
-          - name: epmd
-            port: 4369
-            targetPort: 4369
     statefulSet:
       spec:
         template:
-          spec:
-            containers:
-              - name: rabbitmq
-                ports:
-                  - containerPort: 4369
-                    name: epmd
+          metadata:
+            annotations:
+              traffic.sidecar.istio.io/includeInboundPorts: "5672,15672"
+              traffic.sidecar.istio.io/includeOutboundPorts: "5672,15672"
